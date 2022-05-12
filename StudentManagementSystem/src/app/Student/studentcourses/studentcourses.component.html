@@ -1,0 +1,123 @@
+<div class="container">
+  <h2>All Student Enroled Courses</h2>
+  <div class="mb-3">
+    <a href="javascript:void(0);" (click)="add(Addcontent)" class="btn btn-success waves-effect waves-light"><i
+        class="mdi mdi-plus me-2"></i> Add New</a>
+  </div>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Marks</th>
+
+        <th>Created Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of studentcourses">
+        <td>{{item.course.courseName}}</td>
+        <td>{{item.student.student_Name}}</td>
+        <td>{{item.createdDate|date:'fullDate'}}</td>
+        <td>{{item.isActive}} </td>
+        <td>
+          <button class="btn btn-info" (click)="Viewupdate(Updatecontent,item)" style="margin-right:20px">Update
+          </button>
+          <button class="btn btn-danger" (click)="remove(item)">Delete </button>
+        </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+</div>
+
+<ng-template #Addcontent let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Enrole Student Course</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Close click')">
+    </button>
+  </div>
+  <div class="modal-body" [formGroup]="Form">
+    <div class="row">
+
+      <div class="col-lg-8">
+
+        <div class="mb-4">
+          <label class="form-label" for="formrow-firstname-input">Select Student <span
+              style="color:red;">*</span></label>
+          <select class="form-select" formControlName="studentId">
+            <option>Select</option>
+            <option *ngFor="let item of Students" [ngValue]="item.id">{{item.student_Name}}</option>
+
+          </select>
+        </div>
+
+        <div class="mb-4 ">
+          <label class="form-label" for="formrow-firstname-input">Select Course <span
+              style="color:red;">*</span></label>
+          <select class="form-select" formControlName="courseId">
+            <option>Select</option>
+            <option *ngFor="let item of courses" [ngValue]="item.id">{{item.courseName}}</option>
+
+          </select>
+        </div>
+
+      </div>
+
+      <div class="col-lg-12">
+        <button style="float: right;margin-left: 5px;" (click)="submit()" type="submit" class="btn btn-primary me-1">
+          Submit
+        </button>
+        <button style="float: right;" type="reset" class="btn btn-secondary">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #Updatecontent let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0"> Update Enrole Student Course</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Close click')">
+    </button>
+  </div>
+  <div class="modal-body" [formGroup]="Form">
+    <div class="row">
+
+      <div class="col-lg-8">
+        <div class="mb-4 ">
+          <label class="form-label" for="formrow-firstname-input">Select Student <span
+              style="color:red;">*</span></label>
+          <select class="form-select" formControlName="studentId">
+            <option>Select</option>
+            <option *ngFor="let item of Students" [ngValue]="item.id">{{item.student_Name}}</option>
+
+          </select>
+        </div>
+        <br>
+        <div class="mb-4 ">
+          <label class="form-label" for="formrow-firstname-input">Select Course <span
+              style="color:red;">*</span></label>
+          <select class="form-select" formControlName="courseId">
+            <option>Select</option>
+            <option *ngFor="let item of courses" [ngValue]="item.id">{{item.courseName}}</option>
+
+          </select>
+        </div>
+
+      </div>
+
+      <div class="col-lg-12">
+        <button style="float: right;margin-left: 5px;" (click)="updatechanges()" type="submit"
+          class="btn btn-primary me-1">
+          Save Changes
+        </button>
+        <button style="float: right;" type="reset" class="btn btn-secondary">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
